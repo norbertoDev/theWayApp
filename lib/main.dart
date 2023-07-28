@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:the_way_app/ui/components/FooterBar/footer_bar.dart';
 
 void main() {
   runApp(const MyApp());
@@ -104,11 +105,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      bottomNavigationBar: const FooterBar(),
     );
   }
 }
