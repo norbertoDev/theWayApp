@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:the_way_app/ui/blocs/navigation/nav_bar_items.dart';
+import 'package:the_way_app/ui/blocs/navigation/navigation_cubit.dart';
 
 import 'FooterBarIcon/footer_bar_icon.dart';
 
-class FooterBar extends StatefulWidget {
+class FooterBar extends StatelessWidget {
+  //final NavigationState state;
+
   const FooterBar({Key? key}) : super(key: key);
 
-  @override
-  _FooterBar createState() => _FooterBar();
-}
-
-class _FooterBar extends State<FooterBar> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     double height = 56;
+    int currentIndex = 0;
 
     final primaryColor = Colors.blue;
     final secondaryColor = Colors.black54;
@@ -46,16 +47,22 @@ class _FooterBar extends State<FooterBar> {
           ),
           Container(
             height: height,
+            margin: const EdgeInsets.only(bottom: 10),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 FooterBarIcon(
                   text: "Home",
                   icon: Icons.home,
                   selected: true,
-                  onPressed: () {},
+                  onPressed: () {
+                    BlocProvider.of<NavigationCubit>(context)
+                        .getNavBarItem(NavBarItem.home);
+                  },
                   defaultColor: secondaryColor,
-                  selectedColor: primaryColor,
+                  selectedColor:
+                      currentIndex == 0 ? primaryColor : secondaryColor,
                 ),
                 FooterBarIcon(
                   text: "Search",
@@ -63,9 +70,10 @@ class _FooterBar extends State<FooterBar> {
                   selected: false,
                   onPressed: () {},
                   defaultColor: secondaryColor,
-                  selectedColor: primaryColor,
+                  selectedColor:
+                      currentIndex == 1 ? primaryColor : secondaryColor,
                 ),
-                SizedBox(width: 56),
+                const SizedBox(width: 56),
                 FooterBarIcon(
                     text: "Cart",
                     icon: Icons.local_grocery_store_outlined,

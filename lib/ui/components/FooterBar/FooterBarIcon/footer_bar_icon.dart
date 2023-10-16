@@ -32,6 +32,13 @@ class FooterBarIcon extends StatelessWidget {
             color: selected ? selectedColor : defaultColor,
           ),
         ),
+        Text(
+          text,
+          style: TextStyle(
+              fontSize: 12,
+              height: .1,
+              color: selected ? selectedColor : Colors.grey),
+        ),
       ],
     );
   }
